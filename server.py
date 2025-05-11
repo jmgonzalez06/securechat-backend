@@ -321,8 +321,8 @@ async def heartbeat(websocket, client_id):
 # =============================
 # Flask API (Login / Register)
 # =============================
-app = Flask(__name__)
 from flask_cors import CORS
+app = Flask(__name__)
 
 CORS(app, supports_credentials=True, origins=[
     "http://localhost:5500",
@@ -330,13 +330,15 @@ CORS(app, supports_credentials=True, origins=[
     "https://securechat-frontend-chi.vercel.app"
 ])
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'OPTIONS'])
 def login():
     """Login using MySQL-backed authentication via db.py"""
     data = request.json
     username = data.get('username')
     password = data.get('password')
 
+    if request.method == 'OPTIONS':
+            return '', 204
     if not username or not password:
         return jsonify({'success': False, 'message': 'Missing credentials'}), 400
 
