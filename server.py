@@ -332,13 +332,13 @@ CORS(app, supports_credentials=True, origins=[
 
 @app.route('/login', methods=['POST', 'OPTIONS'])
 def login():
-    """Login using MySQL-backed authentication via db.py"""
+    if request.method == 'OPTIONS':
+        return '', 204
+
     data = request.json
     username = data.get('username')
     password = data.get('password')
 
-    if request.method == 'OPTIONS':
-            return '', 204
     if not username or not password:
         return jsonify({'success': False, 'message': 'Missing credentials'}), 400
 
