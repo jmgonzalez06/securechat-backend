@@ -406,7 +406,8 @@ def uploaded_file(filename):
     return send_from_directory(UPLOAD_DIR, filename)
 
 # Start Flask API thread
-threading.Thread(target=lambda: app.run(host='0.0.0.0', port=5000, debug=False), daemon=True).start()
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=PORT, debug=False)
 
 # =============================
 # WebSocket SSL (Still Placeholder for Now)
