@@ -321,7 +321,7 @@ async def heartbeat(websocket, client_id):
 # =============================
 # Flask API (Login / Register)
 # =============================
-from flask_cors import CORS
+# from flask_cors import CORS
 app = Flask(__name__)
 
 CORS(app, supports_credentials=True, origins=[
