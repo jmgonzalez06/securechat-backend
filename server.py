@@ -403,11 +403,11 @@ threading.Thread(target=lambda: app.run(host='0.0.0.0', port=5000, debug=False),
 # =============================
 # WebSocket SSL (Still Placeholder for Now)
 # =============================
-if not os.path.exists(SSL_CERTFILE) or not os.path.exists(SSL_KEYFILE):
-    raise FileNotFoundError("cert.pem or key.pem missing.")
+# if not os.path.exists(SSL_CERTFILE) or not os.path.exists(SSL_KEYFILE):
+#    raise FileNotFoundError("cert.pem or key.pem missing.")
 
-ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-ssl_context.load_cert_chain(certfile=SSL_CERTFILE, keyfile=SSL_KEYFILE)
+# ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+# ssl_context.load_cert_chain(certfile=SSL_CERTFILE, keyfile=SSL_KEYFILE)
 
 # =============================
 # Launch WebSocket Server
