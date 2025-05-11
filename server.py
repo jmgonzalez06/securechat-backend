@@ -51,11 +51,12 @@ PORT_HTTP = 8081
 # =============================
 # HTTP Static File Server
 # =============================
-web_dir = os.path.join(BASE_DIR, '../frontend')
-os.chdir(web_dir)
-httpd = socketserver.TCPServer(("", PORT_HTTP), http.server.SimpleHTTPRequestHandler)
-print(f"[INFO] HTTP static server running on port {PORT_HTTP}")
-threading.Thread(target=httpd.serve_forever, daemon=True).start()
+# web_dir = os.path.join(BASE_DIR, '../frontend')
+# os.chdir(web_dir)
+# httpd = socketserver.TCPServer(("", PORT_HTTP), http.server.SimpleHTTPRequestHandler)
+# print(f"[INFO] HTTP static server running on port {PORT_HTTP}")
+# threading.Thread(target=httpd.serve_forever, daemon=True).start()
+# =============================
 
 # =============================
 # WebSocket Server
