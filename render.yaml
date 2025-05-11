@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: securechat-backend
+    env: python
+    buildCommand: ""
+    startCommand: python server.py
+    plan: free
+    envVars:
+      - key: MYSQL_HOST
+        value: sql101.infinityfree.com
+      - key: MYSQL_PORT
+        value: 3306
+      - key: MYSQL_USER
+        value: if0_38912331
+      - key: MYSQL_PASSWORD
+        value: N9gDC819VXEta
+      - key: MYSQL_DB
+        value: if0_38912331_securechat
