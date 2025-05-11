@@ -322,7 +322,13 @@ async def heartbeat(websocket, client_id):
 # Flask API (Login / Register)
 # =============================
 app = Flask(__name__)
-CORS(app)
+from flask_cors import CORS
+
+CORS(app, supports_credentials=True, origins=[
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "https://securechat-frontend-chi.vercel.app"
+])
 
 @app.route('/login', methods=['POST'])
 def login():
