@@ -30,22 +30,19 @@ def authenticate_user(username, password):
         bool: True if authentication succeeds, False otherwise.
     """
     try:
-        # Connect to MySQL database using credentials from .env
         conn = mysql.connector.connect(**MYSQL_CONFIG)
         cursor = conn.cursor()
-
-        # Query the hashed password for the given username
         cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
         row = cursor.fetchone()
         conn.close()
 
-        # Validate the provided password against the hashed one
+        if not row:
+            return False  # user not found
+
         stored_hash = row[0]
         if isinstance(stored_hash, str):
             stored_hash = stored_hash.encode('utf-8')
-        if bcrypt.checkpw(password.encode('utf-8'), stored_hash):
-            return True
-        return False
+        return bcrypt.checkpw(password.encode('utf-8'), stored_hash)
 
     except mysql.connector.Error as err:
         print(f"[MySQL ERROR - AUTH] {err}")
