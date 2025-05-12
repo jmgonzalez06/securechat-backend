@@ -3,7 +3,7 @@ services:
     name: securechat-backend
     env: python
     buildCommand: ""
-    startCommand: python -u server.py
+    startCommand: python main.py
     plan: free
     envVars:
       - key: MYSQL_HOST

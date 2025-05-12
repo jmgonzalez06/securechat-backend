@@ -412,27 +412,6 @@ def generate_hash(password):
     hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
     return jsonify({'hash': hashed})
 
-# Start Flask API thread
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=PORT, debug=False)
-
-# =============================
-# WebSocket SSL (Still Placeholder for Now)
-# =============================
-# if not os.path.exists(SSL_CERTFILE) or not os.path.exists(SSL_KEYFILE):
-#    raise FileNotFoundError("cert.pem or key.pem missing.")
-
-# ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-# ssl_context.load_cert_chain(certfile=SSL_CERTFILE, keyfile=SSL_KEYFILE)
-
-# =============================
-# Launch WebSocket Server
-# =============================
-# print(f"[WebSocket] Running on ws://{HOST}:{PORT}") attempt fix 
-print("[WebSocket] Running on all interfaces (0.0.0.0)")
+# Expose for use in main.py
+app.config['PORT'] = PORT
 start_server = websockets.serve(handle_connection, HOST, PORT)
-try:
-    asyncio.get_event_loop().run_until_complete(start_server)
-    asyncio.get_event_loop().run_forever()
-except KeyboardInterrupt:
-    print("\n[Server] Shutdown requested. Closing Down...")
