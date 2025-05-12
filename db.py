@@ -44,10 +44,10 @@ def authenticate_user(username, password):
             stored_hash = stored_hash.encode('utf-8')
             
         # TEMP DEBUGGING
-        print(f"[DEBUG] Authenticating user: {username}")
-        print(f"[DEBUG] Provided password: {password}")
-        print(f"[DEBUG] Stored hash: {stored_hash}")
-        print(f"[DEBUG] Password match: {bcrypt.checkpw(password.encode('utf-8'), stored_hash)}")    
+        print(f"[DEBUG] Authenticating user: {username}", flush=True)
+        print(f"[DEBUG] Provided password: {password}", flush=True)
+        print(f"[DEBUG] Stored hash: {stored_hash}", flush=True)
+        print(f"[DEBUG] Password match: {bcrypt.checkpw(password.encode('utf-8'), stored_hash)}", flush=True)    
             
         return bcrypt.checkpw(password.encode('utf-8'), stored_hash)
 
