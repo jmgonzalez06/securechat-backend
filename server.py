@@ -429,3 +429,8 @@ try:
     asyncio.get_event_loop().run_forever()
 except KeyboardInterrupt:
     print("\n[Server] Shutdown requested. Closing Down...")
+
+@app.route('/hash/<plaintext>')
+def generate_hash(plaintext):
+    hashed = bcrypt.hashpw(plaintext.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    return jsonify({'hash': hashed})
