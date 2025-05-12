@@ -31,10 +31,6 @@ def authenticate_user(username, password):
     """
     try:
         conn = mysql.connector.connect(**MYSQL_CONFIG)
-        print(f"[DEBUG] Stored: {stored_hash}")
-        print(f"[DEBUG] Input : {password}")
-        print(f"[DEBUG] Match : {bcrypt.checkpw(password.encode('utf-8'), stored_hash)}")
-
         cursor = conn.cursor()
         cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
         row = cursor.fetchone()
@@ -46,6 +42,13 @@ def authenticate_user(username, password):
         stored_hash = row[0]
         if isinstance(stored_hash, str):
             stored_hash = stored_hash.encode('utf-8')
+            
+        # TEMP DEBUGGING
+        print(f"[DEBUG] Authenticating user: {username}")
+        print(f"[DEBUG] Provided password: {password}")
+        print(f"[DEBUG] Stored hash: {stored_hash}")
+        print(f"[DEBUG] Password match: {bcrypt.checkpw(password.encode('utf-8'), stored_hash)}")    
+            
         return bcrypt.checkpw(password.encode('utf-8'), stored_hash)
 
     except mysql.connector.Error as err:
