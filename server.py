@@ -338,6 +338,8 @@ def login():
     data = request.json
     username = data.get('username')
     password = data.get('password')
+    
+    print(f"[DEBUG] /login route hit with username: {username}")
 
     if not username or not password:
         return jsonify({'success': False, 'message': 'Missing credentials'}), 400
