@@ -3,16 +3,16 @@ services:
     name: securechat-backend
     env: python
     buildCommand: ""
-    startCommand: python server.py
+    startCommand: python -u server.py
     plan: free
     envVars:
       - key: MYSQL_HOST
-        value: sql101.infinityfree.com
+        value: switchback.proxy.rlwy.net
       - key: MYSQL_PORT
-        value: 3306
+        value: 37489
       - key: MYSQL_USER
-        value: if0_38912331
+        value: root
       - key: MYSQL_PASSWORD
-        value: N9gDC819VXEta
+        value: GdEfdzMJwMehXMnFSmliGbqviWHDHYiU
       - key: MYSQL_DB
-        value: if0_38912331_securechat
+        value: railway
