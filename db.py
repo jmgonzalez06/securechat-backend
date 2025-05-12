@@ -31,6 +31,10 @@ def authenticate_user(username, password):
     """
     try:
         conn = mysql.connector.connect(**MYSQL_CONFIG)
+        print(f"[DEBUG] Stored: {stored_hash}")
+        print(f"[DEBUG] Input : {password}")
+        print(f"[DEBUG] Match : {bcrypt.checkpw(password.encode('utf-8'), stored_hash)}")
+
         cursor = conn.cursor()
         cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
         row = cursor.fetchone()
