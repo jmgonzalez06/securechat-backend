@@ -40,7 +40,10 @@ def authenticate_user(username, password):
         conn.close()
 
         # Validate the provided password against the hashed one
-        if row and bcrypt.checkpw(password.encode('utf-8'), row[0].encode('utf-8')):
+        stored_hash = row[0]
+        if isinstance(stored_hash, str):
+            stored_hash = stored_hash.encode('utf-8')
+        if bcrypt.checkpw(password.encode('utf-8'), stored_hash):
             return True
         return False
 
