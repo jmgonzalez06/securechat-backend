@@ -430,7 +430,7 @@ try:
 except KeyboardInterrupt:
     print("\n[Server] Shutdown requested. Closing Down...")
 
-@app.route('/hash/<plaintext>')
-def generate_hash(plaintext):
-    hashed = bcrypt.hashpw(plaintext.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+@app.route('/hash/<password>', methods=['GET'])
+def generate_hash(password):
+    hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
     return jsonify({'hash': hashed})
