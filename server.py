@@ -405,6 +405,11 @@ def upload_file():
 def uploaded_file(filename):
     return send_from_directory(UPLOAD_DIR, filename)
 
+@app.route('/hash/<password>', methods=['GET'])
+def generate_hash(password):
+    hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    return jsonify({'hash': hashed})
+
 # Start Flask API thread
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=PORT, debug=False)
@@ -429,8 +434,3 @@ try:
     asyncio.get_event_loop().run_forever()
 except KeyboardInterrupt:
     print("\n[Server] Shutdown requested. Closing Down...")
-
-@app.route('/hash/<password>', methods=['GET'])
-def generate_hash(password):
-    hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-    return jsonify({'hash': hashed})
