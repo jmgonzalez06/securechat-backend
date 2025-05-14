@@ -146,11 +146,13 @@ async def ws_handler():
                 await send_message_history(ws, new_room)
 
     except Exception as e:
-        print(f"[WebSocket] {username} disconnected.")  # ONLY FOR TESTING -- REMOVE WHEN DONE TESTING
+        disconnecting_user = usernames.pop(ws, "unknown")
         connected.discard(ws)
-        del usernames[ws]
         rooms.pop(ws, None)
-        await notify_online_status(username, "offline")
+
+        await notify_online_status(disconnecting_user, "offline")
+
+        print(f"[WebSocket] User '{disconnecting_user}' disconnected. Total clients: {len(connected)}")
 
 # =============================
 # Helpers
