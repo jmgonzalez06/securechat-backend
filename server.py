@@ -201,7 +201,8 @@ async def send_message_history(ws, room):
                 "type": "message",
                 "user": row["username"],
                 "room": room,
-                "message": row["message"]
+                "message": row["message"],
+                "fromHistory": True  # critical flag used for message rendering
             }))
     except mysql.connector.Error as err:
         print(f"[MySQL ERROR - HISTORY] {err}")
@@ -231,7 +232,11 @@ async def heartbeat(ws, client_id):
             await asyncio.sleep(HEARTBEAT_FREQ)
         except:
             client_msg_freq.pop(client_id, None)
+            disconnecting_user = usernames.pop(ws, "unknown")
             connected.discard(ws)
+            rooms.pop(ws, None)
+            await notify_online_status(disconnecting_user, "offline")
+            print(f"[WebSocket] User '{disconnecting_user}' disconnected (heartbeat timeout).")
             break
 
 # =============================
