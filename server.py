@@ -3,10 +3,10 @@ import time
 import asyncio
 import bcrypt
 import json
-import mysql.connector
+import mysql.connector # type: ignore
 from dotenv import load_dotenv
-from quart import Quart, request, jsonify, websocket, send_from_directory
-from quart_cors import cors
+from quart import Quart, request, jsonify, websocket, send_from_directory # type: ignore
+from quart_cors import cors # type: ignore
 from werkzeug.utils import secure_filename
 
 # =============================
