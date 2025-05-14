@@ -3,7 +3,7 @@ services:
     name: securechat-backend
     env: python
     buildCommand: ""
-    startCommand: python main.py
+    startCommand: startCommand: hypercorn server:app --bind 0.0.0.0:$PORT
     plan: free
     envVars:
       - key: MYSQL_HOST
